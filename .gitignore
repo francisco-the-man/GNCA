@@ -47,12 +47,6 @@ checkpoints/
 runs/
 lightning_logs/
 
-# Data
-data/
-datasets/
-*.csv
-*.pkl
-*.pickle
 
 # Documentation
 docs/build/
