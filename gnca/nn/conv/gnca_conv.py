@@ -10,6 +10,12 @@ from torch_geometric.typing import Adj, OptTensor
 from typing import Optional, Union
 
 
+from torch import Tensor
+from torch_geometric.nn.conv import MessagePassing
+from torch_geometric.typing import Adj, OptTensor
+from typing import Optional, Union
+
+
 class GNCAConv(MessagePassing):
     """
     Graph Neural Cellular Automata convolution layer.
@@ -128,8 +134,8 @@ class GNCAConv(MessagePassing):
         for j in range(self.post_mlp_layers-1):
             decoder_modules.append(nn.Linear(decoder_input_dim, decoder_input_dim, bias=bias))
             if batch_norm:
-                decoder_modules.append(nn.BatchNorm1d(out_channels))
-            message_mlp_modules.append(self.internal_activation)
+                decoder_modules.append(nn.BatchNorm1d(decoder_input_dim))
+            decoder_modules.append(self.internal_activation)
         if post_mlp_layers > 0:
             decoder_modules.append(nn.Linear(decoder_input_dim,out_channels,bias=bias))
         
